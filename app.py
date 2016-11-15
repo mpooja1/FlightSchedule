@@ -26,6 +26,9 @@ app = Flask(__name__)
 def webhook():
     req = request.get_json(silent=True, force=True)
 
+	json_data1=open(req).read()
+    data1 = json.loads(json_data1)
+
     print("Request:")
     print(json.dumps(req, indent=4))
 
@@ -128,8 +131,6 @@ if __name__ == '__main__':
 	json_data=open("data.json").read()
     data = json.loads(json_data)
 
-    json_data1=open("result.json").read()
-    data1 = json.loads(json_data1)
 	
     port = int(os.getenv('PORT', 5000))
 
