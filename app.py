@@ -4,6 +4,17 @@ import os
 
 from flask import *
 
+def getValue(outEntityName, inEntityName = None, inEntityValue = None):
+    temp = ""
+    if inEntityName != None and inEntityValue != None:
+        for x in xrange(0,9):
+            if data[x][inEntityName] == inEntityValue: 
+                temp = temp +"\n"+ data[x][outEntityName]
+    else:
+        for x in xrange(0,9):
+            temp = temp +"\n"+ data[x][outEntityName]
+	return temp
+
 #from flask import request
 #from flask import make_response
 
@@ -27,13 +38,71 @@ def webhook():
     return r
 
 def makeWebhookResult(req):
-    if req.get("result").get("action") != "bookticket":
+
+		for x in xrange(0,7):
+        arr[x]=None
+        x = x + 1
+
+    result = req.get("result")
+    parameters = result.get("parameters")
+
+	arr[0][0] = "AirLine"
+	arr[0][1] = "FlightNumber"
+	arr[0][2] = "DepartureCity"
+	arr[0][3] = "ArrivalCity"
+	arr[0][4] = "ArrivalTime"
+	arr[0][5] = "Status"
+	arr[0][6] = "DepartureTime"
+	
+    arr[1][0] = parameters.get("AirLine")
+    arr[1][1] = parameters.get("FlightNumber")
+    arr[1][2] = parameters.get("DepartureCity")
+    arr[1][3] = parameters.get("ArrivalCity")
+    arr[1][4] = parameters.get("ArrivalTime")
+    arr[1][5] = parameters.get("Status")
+    arr[1][6] = parameters.get("DepartureTime")
+    array[]
+    y = 0
+    for x in xrange(0,7):
+        if arr[x]!=None:
+            array[y]=arr[x]
+            y = y + 1
+
+	y = y-1
+    if req.get("result").get("action") == "AirLine":
+		print getValue("AirLine", arr[0][y], arr[1][y])
+			
+    if req.get("result").get("action") == "FlightNumber":
+		
+	
+    if req.get("result").get("action") == "Status":
+
+		
+    if req.get("result").get("action") == "ArrivalTime":
+	
+	
+	
+    if req.get("result").get("action") == "ArrivalCity":
+	
+	
+	
+    if req.get("result").get("action") == "DepartureTime":
+	
+	
+	
+    if req.get("result").get("action") == "DepartureCity":
+	
+	
+
+   """ if req.get("result").get("action") != "bookticket":
         return {}
     result = req.get("result")
     parameters = result.get("parameters")
-    FlightNumber = parameters.get("FlightNumber")
-	AirLine = parameters.get("AirLine")
+    FliNumber = parameters.get("FlightNumber")
+	Aire = parameters.get("AirLine")
 
+	FlightNumber = {'AjaxAir':'113', 'AjaxAir':'114', 'BakerAir':'121', 'BakerAir':'122', 'BakerAir':'124', 'CarsonAir':'522','CarsonAir':'679','CarsonAir':'670','CarsonAir':'671','CarsonAir':'672'}
+	
     AirLine = {'113':'AjaxAir', '114':'AjaxAir', '121':'BakerAir', '122':'BakerAir', '124':'BakerAir', '522': 'CarsonAir','679':'CarsonAir','670':'CarsonAir','671':'CarsonAir','672':'CarsonAir'}
   DepartureCity = {'113':'Portland', '114':'Atlanta', '121':'Atlanta', '122':'NewYork', '124':'Portland', '522': 'Portland','679':'NewYork','670':'NewYork','671':'Atlanta','672':'Portland'}
   DepartureTime = {'113':'8:03AM', '114':'2:05PM', '121':'5:14PM', '122':'9:00PM', '124':'9:03AM', '522':'2:15AM','679':'9:30AM','670':'9:30AM','671':'1:20PM','672':'1:25PM'}
@@ -41,12 +110,11 @@ def makeWebhookResult(req):
   ArrivalTime = {'113': '12:51AM', '114': '4:44PM', '121', '7:20PM', '122': '12:13AM', '124': '12:52PM', '522': '4:58PM', '679': '11:30AM' , '670': '12:05PM' , '671': '2:55PM' , '672': '8:36PM'}
    Status = {'113': 'landed', '114': 'boarding', '121': 'departed', '122': 'scheduled', '124': 'delayedto9:55', '522': 'scheduled', '679': 'departed' , '670': 'departed' , '671': 'scheduled' , '672': 'scheduled'}
    
-   
-    speech = "The airline for " + AirLine + " is " + str(FlightNumber[AirLine]) + "."
-  #  speech = "The airline for " + FlightNumber + " is " + str(AirLine[FlightNumber]) + "."
-
+       speech = "The flights for " + Aire + " is " + str(FlightNumber[Aire]) + "."
+  #  speech = "The airline for " + FliNumber + " is " + str(AirLine[FliNumber]) + "."
+"""
     print("Response:")
-    print(speech)
+  #  print(speech)
 
     return {
         "speech": speech,
@@ -56,6 +124,13 @@ def makeWebhookResult(req):
 
 
 if __name__ == '__main__':
+
+	json_data=open("data.json").read()
+    data = json.loads(json_data)
+
+    json_data1=open("result.json").read()
+    data1 = json.loads(json_data1)
+	
     port = int(os.getenv('PORT', 5000))
 
     print "Starting app on port %d" % port

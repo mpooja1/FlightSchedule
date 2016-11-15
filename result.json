@@ -1,0 +1,39 @@
+{
+  "id": "f0e7f098-e68c-42d1-b366-da367010613e",
+  "timestamp": "2016-11-15T10:47:38.875Z",
+  "result": {
+    "source": "agent",
+    "resolvedQuery": "What is the status of AjaxAir 114?",
+    "action": "bookticket",
+    "actionIncomplete": false,
+    "parameters": {
+      "AirLine": [
+        "AjaxAir"
+      ],
+      "FlightNumber": "114",
+      "Status": "status"
+    },
+    "contexts": [],
+    "metadata": {
+      "intentId": "4fc88c2d-27e3-4ffa-a77d-7df167d40db9",
+      "webhookUsed": "true",
+      "intentName": "bookticket"
+    },
+    "fulfillment": {
+      "speech": "",
+      "messages": [
+        {
+          "type": 0,
+          "speech": ""
+        }
+      ]
+    },
+    "score": 1
+  },
+  "status": {
+    "code": 206,
+    "errorType": "partial_content",
+    "errorDetails": "Webhook call failed. Error: org.springframework.web.client.HttpServerErrorException: 503 Service Unavailable"
+  },
+  "sessionId": "c06ea32d-4ede-4a58-9417-9691a3e89bca"
+}
