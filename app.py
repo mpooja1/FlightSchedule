@@ -110,10 +110,10 @@ def makeWebhookResult(req):
   #ArrivalTime = {'113': '12:51AM', '114': '4:44PM', '121', '7:20PM', '122': '12:13AM', '124': '12:52PM', '522': '4:58PM', '679': '11:30AM' , '670': '12:05PM' , '671': '2:55PM' , '672': '8:36PM'}
   ## 
     #   speech = "The flights for " + Aire + " is " + str(FlightNumber[Aire]) + "."
-  #  speech = "The airline for " + FliNumber + " is " + str(AirLine[FliNumber]) + "."
+    speech = "The airline for " #+ FliNumber + " is " + str(AirLine[FliNumber]) + "."
 
     print("Response:")
-  #  print(speech)
+    print(speech)
 
     return {
         "speech": speech,
