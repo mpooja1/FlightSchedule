@@ -59,7 +59,7 @@ def makeWebhookResult(req):
 	    
         result = req.get("result")
         parameters = result.get("parameters")
-        Airline = parameters.get("Airline")
+        Airline = parameters.get("AirLine")
         temp = getValue("Flight number","Airline",Airline)
 		
  
