@@ -4,7 +4,7 @@ import os
 
 from flask import *
 
-def getValue(outEntityName, inEntityName = None, inEntityValue = None):
+"""def getValue(outEntityName, inEntityName = None, inEntityValue = None):
     temp = ""
     if inEntityName != None and inEntityValue != None:
         for x in xrange(0,9):
@@ -13,7 +13,7 @@ def getValue(outEntityName, inEntityName = None, inEntityValue = None):
     else:
         for x in xrange(0,9):
             temp = temp +"\n"+ data[x][outEntityName]
-	return temp
+	return temp"""
 
 #from flask import request
 #from flask import make_response
@@ -22,7 +22,6 @@ def getValue(outEntityName, inEntityName = None, inEntityValue = None):
 app = Flask(__name__)
 
 
-@app.route('/webhook', methods=['POST'])
 """def webhook():
     req = request.get_json(silent=True, force=True)
     json_data1=open(req).read()
@@ -37,8 +36,10 @@ app = Flask(__name__)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r"""
+
 	
-	def webhook():
+@app.route('/webhook', methods=['POST'])
+def webhook():
     req = request.get_json(silent=True, force=True)
 
     print("Request:")
@@ -58,20 +59,29 @@ def makeWebhookResult(req):
     result = req.get("result")
     parameters = result.get("parameters")
     FliNumber = parameters.get("FlightNumber")
-	Aire = parameters.get("AirLine")
+    Aire = parameters.get("AirLine")
 	
-	result = req.get("result")
+    result = req.get("result")
     parameters = result.get("parameters")
 	
-	 stuff.setdefault('AirLine', None)
-	 stuff.setdefault('FlightNumber', None)
-	 stuff.setdefault('DepartureCity', None)
-	 stuff.setdefault('DepartureTime', None)
-	 stuff.setdefault('ArrivalCity', None)
-	 stuff.setdefault('ArrivalTime', None)
-	 stuff.setdefault('Status', None)
+    stuff.setdefault('AirLine', None)
+    stuff.setdefault('FlightNumber', None)
+    stuff.setdefault('DepartureCity', None)
+    stuff.setdefault('DepartureTime', None)
+    stuff.setdefault('ArrivalCity', None)
+    stuff.setdefault('ArrivalTime', None)
+    stuff.setdefault('Status', None)
 
-	stuff = {'AirLine': parameters.get("AirLine"), 'FlightNumber': parameters.get("FlightNumber"), 'DepartureCity': parameters.get("DepartureCity"), 'ArrivalCity': parameters.get("ArrivalCity"),'ArrivalTime': parameters.get("ArrivalTime"),'Status': parameters.get("Status"),'DepartureTime': parameters.get("DepartureTime")}
+    stuff = {'AirLine': parameters.get("AirLine"), 'FlightNumber': parameters.get("FlightNumber"), 'DepartureCity': parameters.get("DepartureCity"), 'ArrivalCity': parameters.get("ArrivalCity"),'ArrivalTime': parameters.get("ArrivalTime"),'Status': parameters.get("Status"),'DepartureTime': parameters.get("DepartureTime")}
+    speech = "The flights for "
+    print("Response:")
+    print("this")
+
+    return {
+        "speech": speech,
+        "displayText": speech,
+        "source": "apiai-flight-schedule"
+    }
 
 """
 	FlightNumber = {'AjaxAir':'113', 'AjaxAir':'114', 'BakerAir':'121', 'BakerAir':'122', 'BakerAir':'124', 'CarsonAir':'522','CarsonAir':'679','CarsonAir':'670','CarsonAir':'671','CarsonAir':'672'}
@@ -84,29 +94,12 @@ def makeWebhookResult(req):
    Status = {'113': 'landed', '114': 'boarding', '121': 'departed', '122': 'scheduled', '124': 'delayedto9:55', '522': 'scheduled', '679': 'departed' , '670': 'departed' , '671': 'scheduled' , '672': 'scheduled'}
    """
    
-   
-   # speech = "The flights for " + Aire + " is " + str(FlightNumber[Aire]) + "."
-  #  speech = "The airline for " + FliNumber + " is " + str(AirLine[FliNumber]) + "."
-   speech = "The Flights " 
-
-    print("Response:")
-    print(speech)
-
-    return {
-        "speech": speech,
-        "displayText": speech,
-        "source": "apiai-flight-schedule"
-    }
+    
 
 
 if __name__ == '__main__':
-
-    json_data=open("data.json").read()
-    data = json.loads(json_data)
-
-	
     port = int(os.getenv('PORT', 5000))
 
-    print "Starting app on port %d" % port
+    print("Starting app on port %d" % port)
 
     app.run(debug=True, port=port, host='0.0.0.0')
