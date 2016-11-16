@@ -87,7 +87,7 @@ def makeWebhookResult(req):
    
    # speech = "The flights for " + Aire + " is " + str(FlightNumber[Aire]) + "."
   #  speech = "The airline for " + FliNumber + " is " + str(AirLine[FliNumber]) + "."
-   speech = "The Flights " + FliNumber + " is " + str(stuff[Aire]) + " ."
+   speech = "The Flights " 
 
     print("Response:")
     print(speech)
