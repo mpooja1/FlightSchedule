@@ -69,7 +69,21 @@ def makeWebhookResult(req):
         FlightNumber = parameters.get("FlightNumber")
         temp = getValue("Departure time","Flight number",FlightNumber)
    
-
+    if req.get("result").get("action") == "Departurecity":
+	    
+        result = req.get("result")
+        parameters = result.get("parameters")
+        FlightNumber = parameters.get("FlightNumber")
+        temp = getValue("Departure City","Flight number",FlightNumber)
+		
+    if req.get("result").get("action") == "Arrivalcity":
+	    
+        result = req.get("result")
+        parameters = result.get("parameters")
+        FlightNumber = parameters.get("FlightNumber")
+        temp = getValue("Arrival City","Flight number",FlightNumber)
+   
+   
  
 	
 
