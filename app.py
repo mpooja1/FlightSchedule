@@ -23,7 +23,7 @@ app = Flask(__name__)
 
 
 @app.route('/webhook', methods=['POST'])
-def webhook():
+"""def webhook():
     req = request.get_json(silent=True, force=True)
     json_data1=open(req).read()
     data1 = json.loads(json_data1)
@@ -36,17 +36,46 @@ def webhook():
     print(res)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
+    return r"""
+	
+	def webhook():
+    req = request.get_json(silent=True, force=True)
+
+    print("Request:")
+    print(json.dumps(req, indent=4))
+
+    res = makeWebhookResult(req)
+
+    res = json.dumps(res, indent=4)
+    print(res)
+    r = make_response(res)
+    r.headers['Content-Type'] = 'application/json'
     return r
 
 def makeWebhookResult(req):
+
+	result = req.get("result")
+    parameters = result.get("parameters")
+	
+	 stuff.setdefault('AirLine', None)
+	 stuff.setdefault('FlightNumber', None)
+	 stuff.setdefault('DepartureCity', None)
+	 stuff.setdefault('DepartureTime', None)
+	 stuff.setdefault('ArrivalCity', None)
+	 stuff.setdefault('ArrivalTime', None)
+	 stuff.setdefault('Status', None)
+
+	stuff = {'AirLine': parameters.get("AirLine"), 'FlightNumber': parameters.get("FlightNumber"), 'DepartureCity': parameters.get("DepartureCity"), 'ArrivalCity': parameters.get("ArrivalCity"),'ArrivalTime': parameters.get("ArrivalTime"),'Status': parameters.get("Status"),'DepartureTime': parameters.get("DepartureTime")}
+
+	"""arr=[[]]
     for x in xrange(0,7):
-        arr[x]=None
+        arr[1,x]=None
         x = x + 1
 
     result = req.get("result")
     parameters = result.get("parameters")
     
-    arr=[[]]
+   
     array=[]
     arr[0,0] = "AirLine"
     arr[0,1] = "FlightNumber"
@@ -64,17 +93,18 @@ def makeWebhookResult(req):
     arr[1,6] = parameters.get("DepartureTime")
     y = 0
     for x in xrange(0,7):
-        if arr[x]!=None:
-            array[y]=arr[x]
+        if arr[1,x]!=None:
+            array[y]=arr[1,x]
             y = y + 1
 
 	y = y-1
 
-    
+"""    
 
     if req.get("result").get("action") == "AirLine":
-	   print getValue("AirLine", arr[0][y], arr[1][y])
-			
+	   #print getValue("AirLine", arr[0][y], arr[1][y])
+	   speech = "The FlightNumber of  to is " + str(stuff[FlightNumber]) + "."
+	   #speech = "The airline for " + FliNumber + " is " + str(AirLine[FliNumber]) + "."
     #if req.get("result").get("action") == "FlightNumber":
 		
 	
@@ -110,7 +140,7 @@ def makeWebhookResult(req):
   #ArrivalTime = {'113': '12:51AM', '114': '4:44PM', '121', '7:20PM', '122': '12:13AM', '124': '12:52PM', '522': '4:58PM', '679': '11:30AM' , '670': '12:05PM' , '671': '2:55PM' , '672': '8:36PM'}
   ## 
     #   speech = "The flights for " + Aire + " is " + str(FlightNumber[Aire]) + "."
-    speech = "The airline for " #+ FliNumber + " is " + str(AirLine[FliNumber]) + "."
+   # speech = "The airline for " #+ FliNumber + " is " + str(AirLine[FliNumber]) + "."
 
     print("Response:")
     print(speech)
