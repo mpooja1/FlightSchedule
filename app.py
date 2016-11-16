@@ -37,8 +37,8 @@ def webhook():
     return r
 
 def makeWebhookResult(req):
-   # if req.get("result").get("action") != "bookticket":
-    #    return {}
+	if req.get("result").get("action") != "bookticketair":
+		return {}
 	arr=[[]]
 	for x in xrange(0,7):
 		arr[1,x]=None
