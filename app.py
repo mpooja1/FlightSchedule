@@ -45,7 +45,7 @@ def makeWebhookResult(req):
 
     AirLine = {'113':'AjaxAir', '114':'AjaxAir', '121':'BakerAir', '122':'BakerAir', '124':'BakerAir', '522': 'CarsonAir','679':'CarsonAir','670':'CarsonAir','671':'CarsonAir','672':'CarsonAir'}
     
-    temp = getValue("AirLine","Flight number","113")
+    temp = getValue("Airline","Flight number","113")
     #speech = "The airline for " + FlightNumber + " is " + str(AirLine[FlightNumber]) + " euros."
 
     print("Response:")
