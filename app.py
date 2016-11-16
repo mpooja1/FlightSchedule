@@ -37,16 +37,25 @@ def webhook():
     return r
 
 def makeWebhookResult(req):
-    if req.get("result").get("action") != "bookticket":
-        return {}
-    result = req.get("result")
-    parameters = result.get("parameters")
-    FlightNumber = parameters.get("FlightNumber")
+   # if req.get("result").get("action") != "bookticket":
+    #    return {}
+FlightNumber = None
 
-    #AirLine = {'113':'AjaxAir', '114':'AjaxAir', '121':'BakerAir', '122':'BakerAir', '124':'BakerAir', '522': 'CarsonAir','679':'CarsonAir','670':'CarsonAir','671':'CarsonAir','672':'CarsonAir'}
+    if req.get("result").get("action") == "bookticket":
+	    
+        result = req.get("result")
+        parameters = result.get("parameters")
+        FlightNumber = parameters.get("FlightNumber")
+        temp = getValue("Airline","Flight number",FlightNumber)
     
-    temp = getValue("Airline","Flight number",FlightNumber)
-    #speech = "The airline for " + FlightNumber + " is " + str(AirLine[FlightNumber]) + " euros."
+     if req.get("result").get("action") == "Status":
+	    
+        result = req.get("result")
+        parameters = result.get("parameters")
+        FlightNumber = parameters.get("FlightNumber")
+        temp = getValue("Status","Flight number",FlightNumber)
+ 
+	
 
     print("Response:")
     print(temp)
