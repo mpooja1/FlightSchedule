@@ -37,8 +37,8 @@ def webhook():
     return r
 
 def makeWebhookResult(req):
-	if req.get("result").get("action") != "bookticketair":
-		return {}
+	
+	"""
 	arr=[[]]
 	for x in xrange(0,7):
 		arr[1,x]=None
@@ -76,32 +76,30 @@ def makeWebhookResult(req):
 	if y == 0:
 		temp = getValue("Airline",array[0,0],array[1,0])
 	"""
-    if req.get("result").get("action") == "AirLine":
-	   print getValue("AirLine", arr[0][y], arr[1][y])
 	
-	
-    FlightNumber = None
-    Airline = None
-    if req.get("result").get("action") == "bookticket":
+  	
+	FlightNumber = None
+	Airline = None
+	if req.get("result").get("action") == "bookticket":
 	    
-        result = req.get("result")
-        parameters = result.get("parameters")
-        FlightNumber = parameters.get("FlightNumber")
-        temp = getValue("Airline","Flight number",FlightNumber)
-    """
-	""" if req.get("result").get("action") == "Status":
-	    
-        result = req.get("result")
-        parameters = result.get("parameters")
-        FlightNumber = parameters.get("FlightNumber")
-        temp = getValue("Status","Flight number",FlightNumber)
+		result = req.get("result")
+		parameters = result.get("parameters")
+		FlightNumber = parameters.get("FlightNumber")
+		temp = getValue("Airline","Flight number",FlightNumber)
     
-    if req.get("result").get("action") == "Flightnumber":
+	if req.get("result").get("action") == "Status":
 	    
-        result = req.get("result")
-        parameters = result.get("parameters")
-        Airline = parameters.get("AirLine")
-        temp = getValue("Flight number","Airline",Airline)"""
+		result = req.get("result")
+		parameters = result.get("parameters")
+		FlightNumber = parameters.get("FlightNumber")
+		temp = getValue("Status","Flight number",FlightNumber)
+    
+	if req.get("result").get("action") == "Flightnumber":
+	    
+		result = req.get("result")
+		parameters = result.get("parameters")
+		Airline = parameters.get("AirLine")
+		temp = getValue("Flight number","Airline",Airline)
 		
  
 	
