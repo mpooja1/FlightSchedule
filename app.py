@@ -49,13 +49,13 @@ def makeWebhookResult(req):
     
     
 	array=[[]]
-	arr[0,0] = "AirLine"
-	arr[0,1] = "FlightNumber"
-	arr[0,2] = "DepartureCity"
-	arr[0,3] = "ArrivalCity"
-	arr[0,4] = "ArrivalTime"
+	arr[0,0] = "Airline"
+	arr[0,1] = "Flight number"
+	arr[0,2] = "Departure City"
+	arr[0,3] = "Arrival City"
+	arr[0,4] = "Arrival Time"
 	arr[0,5] = "Status"
-	arr[0,6] = "DepartureTime"
+	arr[0,6] = "Departure time"
 	arr[1,0] = parameters.get("AirLine")
 	arr[1,1] = parameters.get("FlightNumber")
 	arr[1,2] = parameters.get("DepartureCity")
