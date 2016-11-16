@@ -9,11 +9,11 @@ from flask import make_response
 # Flask app should start in global layout
 app = Flask(__name__)
 
-def getValue(outEntityName = None, inEntityName = None, inEntityValue = None, secondInEntityName = None, secondInEntityValue = None):
+def getValue(outEntityName = None, inEntityName = None, inEntityValue = None):
 	temp = ""
 	if inEntityName != None and inEntityValue != None:
 		for x in xrange(0,9):
-			if data[x][inEntityName] == inEntityValue and data[x][secondInEntityName] == secondInEntityValue: 
+			if data[x][inEntityName] == inEntityValue: 
 				temp = temp +"\n"+ data[x][outEntityName]
 	else:
 		for x in xrange(0,9):
