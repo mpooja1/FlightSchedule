@@ -9,6 +9,17 @@ from flask import make_response
 # Flask app should start in global layout
 app = Flask(__name__)
 
+def getValue(outEntityName = None, inEntityName = None, inEntityValue = None):
+	temp = ""
+	if inEntityName != None and inEntityValue != None:
+		for x in xrange(0,9):
+			if data[x][inEntityName] == inEntityValue: 
+				temp = temp +"\n"+ data[x][outEntityName]
+	else:
+		for x in xrange(0,9):
+			temp = temp +"\n"+ data[x][outEntityName]
+	speech = "The airline for "
+	return temp
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -34,19 +45,24 @@ def makeWebhookResult(req):
 
     AirLine = {'113':'AjaxAir', '114':'AjaxAir', '121':'BakerAir', '122':'BakerAir', '124':'BakerAir', '522': 'CarsonAir','679':'CarsonAir','670':'CarsonAir','671':'CarsonAir','672':'CarsonAir'}
     
-    speech = "The airline for " + FlightNumber + " is " + str(AirLine[FlightNumber]) + " euros."
+    temp = getValue("AirLine","FlightNumber","113")
+    #speech = "The airline for " + FlightNumber + " is " + str(AirLine[FlightNumber]) + " euros."
 
     print("Response:")
-    print(speech)
+    print(temp)
 
     return {
-        "speech": speech,
-        "displayText": speech,
+        "speech": temp,
+        "displayText": temp,
         "source": "apiai-flight-schedule"
     }
 
 
 if __name__ == '__main__':
+    
+    json_data=open("data.json").read()
+    data = json.loads(json_data)	
+	
     port = int(os.getenv('PORT', 5000))
 
     print "Starting app on port %d" % port
