@@ -9,11 +9,11 @@ from flask import make_response
 # Flask app should start in global layout
 app = Flask(__name__)
 
-def getValue(outEntityName = None, inEntityName = None, inEntityValue = None):
+def getValue(outEntityName = None, inEntityName = None, inEntityValue = None, secondInEntityName = None, secondEntityValue = None):
 	temp = ""
 	if inEntityName != None and inEntityValue != None:
 		for x in xrange(0,9):
-			if data[x][inEntityName] == inEntityValue: 
+			if data[x][inEntityName] == inEntityValue and data[x][secondInEntityName] == secondInEntityValue: 
 				temp = temp +"\n"+ data[x][outEntityName]
 	else:
 		for x in xrange(0,9):
@@ -40,7 +40,7 @@ def makeWebhookResult(req):
    # if req.get("result").get("action") != "bookticket":
     #    return {}
     FlightNumber = None
-    Airline = None
+
     if req.get("result").get("action") == "bookticket":
 	    
         result = req.get("result")
@@ -54,14 +54,6 @@ def makeWebhookResult(req):
         parameters = result.get("parameters")
         FlightNumber = parameters.get("FlightNumber")
         temp = getValue("Status","Flight number",FlightNumber)
-    
-    if req.get("result").get("action") == "Flightnumber":
-	    
-        result = req.get("result")
-        parameters = result.get("parameters")
-        Airline = parameters.get("Airline")
-        temp = getValue("Flight number","Airline",Airline)
-		
  
 	
 
