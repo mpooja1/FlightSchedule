@@ -41,8 +41,8 @@ def makeWebhookResult(req):
     #    return {}
     FlightNumber = None
     Airline = None
-	Status = None
-	ArrivalCity = None
+    Status = None
+    ArrivalCity = None
 	
     if req.get("result").get("action") == "bookticket":
 	    
