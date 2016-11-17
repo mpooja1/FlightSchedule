@@ -108,16 +108,7 @@ def makeWebhookResult(req):
         parameters = result.get("parameters")
         FlightNumber = parameters.get("FlightNumber")
         temp = getValue("Arrival City","Flight number",FlightNumber)
-"""		
-   
-    if req.get("result").get("action") == "Arrivalcity":
-	    
-        result = req.get("result")
-        parameters = result.get("parameters")
-        ArrivalCity = parameters.get("ArrivalCity")
-        temp = getValue("Flight number","Arrival City",ArrivalCity)   
-"""
-	
+
 
     print("Response:")
     print(temp)
